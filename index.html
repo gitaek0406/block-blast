@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <title>블록 블라스트! (Block Blast)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Header: Title & Settings -->
+    <header class="game-header">
+      <div class="logo-area">
+        <h1 class="game-title">BLOCK <span class="highlight">BLAST!</span></h1>
+      </div>
+      <div class="header-controls">
+        <button id="sound-toggle-btn" class="icon-btn" aria-label="사운드 켜기/끄기" title="사운드 토글">
+          <span class="icon" id="sound-icon">🔊</span>
+        </button>
+        <button id="restart-btn" class="icon-btn" aria-label="새 게임" title="다시 시작">
+          <span class="icon">🔄</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Score Board -->
+    <div class="score-container">
+      <div class="score-card current-score-card">
+        <span class="score-label">SCORE</span>
+        <span class="score-value" id="current-score">0</span>
+      </div>
+      <div class="score-card high-score-card">
+        <span class="score-label">BEST 👑</span>
+        <span class="score-value" id="high-score">0</span>
+      </div>
+    </div>
+
+    <!-- Combo & Feedback Banner -->
+    <div id="combo-banner-container">
+      <div id="combo-banner" class="hidden">
+        <span id="combo-text">COMBO x2!</span>
+      </div>
+    </div>
+
+    <!-- Main Game Board Container -->
+    <div class="board-wrapper">
+      <div id="board" class="board-grid"></div>
+      <!-- Visual Effects Canvas overlay -->
+      <canvas id="fx-canvas"></canvas>
+    </div>
+
+    <!-- Block Dock (3 Pieces) -->
+    <div class="dock-container">
+      <div class="dock-slot" data-slot="0" id="slot-0"></div>
+      <div class="dock-slot" data-slot="1" id="slot-1"></div>
+      <div class="dock-slot" data-slot="2" id="slot-2"></div>
+    </div>
+
+    <!-- Bottom Controls / Hint -->
+    <footer class="game-footer">
+      <p class="guide-text">블록을 끌어서 보드에 놓거나, 터치/클릭하여 배치하세요!</p>
+    </footer>
+  </div>
+
+  <!-- Dragging Ghost / Follower -->
+  <div id="drag-ghost" class="hidden"></div>
+
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content animate-pop">
+      <div class="game-over-icon">💥</div>
+      <h2 class="modal-title">GAME OVER</h2>
+      <p class="modal-subtitle">더 이상 블록을 놓을 공간이 없습니다!</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-label">최종 점수</span>
+          <span class="stat-value" id="final-score">0</span>
+        </div>
+        <div class="stat-box highlight-stat">
+          <span class="stat-label">최고 기록</span>
+          <span class="stat-value" id="final-best">0</span>
+        </div>
+      </div>
+
+      <div id="new-record-badge" class="badge hidden">🎉 신기록 달성! 🎉</div>
+
+      <button id="modal-restart-btn" class="btn btn-primary pulse">
+        다시 도전하기 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- Audio System & Game Logic Scripts -->
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
